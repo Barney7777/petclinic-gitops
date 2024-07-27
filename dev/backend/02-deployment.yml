@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: quiz-app-backend-dev-deployment
-  Namespace: quiz-app-backend
+  namespace: quiz-app-backend
   labels:
     app: quiz-app-backend
     env: dev
@@ -11,7 +11,7 @@ spec:
   replicas: 2
   strategy:
     type: RollingUpdate
-    RollingUpdate:
+    rollingUpdate:
       maxSurge: 1
       maxUnavailable: 25%
   selector:
@@ -26,7 +26,7 @@ spec:
     spec:
       imagePullSecrets:
         - name: ecr-registry-secret
-      container:
+      containers:
         - name: quiz-app-backend-dev
           image: 587866558777.dkr.ecr.ap-southeast-2.amazonaws.com/quiz-app-backend-dev:852e2473675c013513ece1e1da954d483b961e89
           imagePullPolicy: Always
