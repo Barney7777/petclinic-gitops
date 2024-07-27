@@ -28,7 +28,7 @@ spec:
         - name: ecr-registry-secret
       containers:
         - name: quiz-app-backend-dev
-          image: 587866558777.dkr.ecr.ap-southeast-2.amazonaws.com/quiz-app-frontend-dev:9ba33357e2cfe0a5af491282af94f2b5a13805ad
+          image: 587866558777.dkr.ecr.ap-southeast-2.amazonaws.com/quiz-app-frontend-dev:f449785a663256cf3af604f8bc312f9153025970
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
