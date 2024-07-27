@@ -16,7 +16,7 @@ metadata:
 
 spec:
   rules:
-    - host: quizapp.barneywang.com
+    - host: quizapp.barneywang.click
       http:
         paths: 
           - path: /api/questions
