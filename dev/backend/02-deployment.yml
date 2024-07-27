@@ -24,6 +24,7 @@ spec:
         app: quiz-app-backend
         env: dev
     spec:
+      serviceAccountName: secret-deployment-sa
       imagePullSecrets:
         - name: ecr-registry-secret
       containers:
@@ -32,9 +33,20 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
-          env: 
-            - name: MONGO_URI
-              value: mongodb+srv://wangyaxu7:3Z9FqG4ZbDCXFUpL@quiz-app.037wdok.mongodb.net/?retryWrites=true&w=majority&appName=quiz-app
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: quiz-app-backend-secret-manager
+          # env: 
+          #   - name: MONGO_URI
+          #     value: mongodb+srv://wangyaxu7:3Z9FqG4ZbDCXFUpL@quiz-app.037wdok.mongodb.net/?retryWrites=true&w=majority&appName=quiz-app
           # if app is able to  send trraffic or not
           livenessProbe:
             httpGet:
