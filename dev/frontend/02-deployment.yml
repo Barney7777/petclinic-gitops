@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quiz-app-frontend-dev-deployment
+  namespace: quiz-app-frontend-dev
+  labels:
+    app: quiz-app-frontend
+    env: dev
+  
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      app: quiz-app-frontend
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: quiz-app-frontend
+        env: dev
+    spec:
+      imagePullSecrets:
+        - name: ecr-registry-secret
+      containers:
+        - name: quiz-app-backend-dev
+          image: 587866558777.dkr.ecr.ap-southeast-2.amazonaws.com/quiz-app-frontend-dev:9ba33357e2cfe0a5af491282af94f2b5a13805ad
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: VITE_REACT_APP_API_UR
+              valueFrom:
+                secretKeyRef:
+                  name: frontend-secret
+                  key: VITE_REACT_APP_API_UR
