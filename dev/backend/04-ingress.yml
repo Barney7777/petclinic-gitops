@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: quiz-app-backend-dev-ingress
+  namespace: quiz-app-backend-dev
+  annotations:
+    kubernetes.io/ingress.class: alb
+    # Load Balancer Name
+    alb.ingress.kubernetes.io/load-balancer-name: quiz-app-backend-dev-ingress
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-2:587866558777:certificate/e82b0efc-9020-4eea-b6e6-5ce054a186da
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/healthcheck-path: /api/health-check
+
+spec:
+  rules:
+    - host: quizapp.barneywang.com
+      http:
+        paths: 
+          - path: /api/questions
+            pathType: Prefix
+            backend:
+              service:
+                name: quiz-app-backend-dev-service
+                port:
+                  number: 3000
