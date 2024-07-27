@@ -13,7 +13,6 @@ metadata:
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-2:587866558777:certificate/e82b0efc-9020-4eea-b6e6-5ce054a186da
     alb.ingress.kubernetes.io/ssl-redirect: '443'
     alb.ingress.kubernetes.io/healthcheck-path: /api/health
-    alb.ingress.kubernetes.io/healthcheck-protocol: HTTPS
 
 spec:
   rules:
