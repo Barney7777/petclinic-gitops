@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: quiz-app-backend-dev-deployment
-  namespace: quiz-app-backend
+  namespace: quiz-app-backend-dev
   labels:
     app: quiz-app-backend
     env: dev
