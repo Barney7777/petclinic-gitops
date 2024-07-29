@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: para-deployment-sa
+  namespace: triptribe
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::587866558777:role/para-deployment-role

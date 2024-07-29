@@ -23,8 +23,9 @@ spec:
       labels:
         app: quiz-app-backend
         env: dev
-    spec:
-      serviceAccountName: secret-deployment-sa
+    spec: 
+      # serviceAccountName: secret-deployment-sa
+      serviceAccountName: para-deployment-sa
       imagePullSecrets:
         - name: ecr-registry-secret
       containers:
@@ -34,19 +35,16 @@ spec:
           ports:
             - containerPort: 3000
           volumeMounts:
-            - name: secrets-store-inline
-              mountPath: "/mnt/secrets-store"
+            - name: para-store-inline
+              mountPath: "/mnt/para-store"
               readOnly: true
-          env: 
-            - name: MONGO_URI
-              value: "/mnt/secrets-store/MONGO_URI"
       volumes:
-        - name: secrets-store-inline
+        - name: para-store-inline
           csi:
             driver: "secrets-store.csi.k8s.io"
             readOnly: true
             volumeAttributes:
-              secretProviderClass: quiz-app-backend-secret-manager
+              secretProviderClass: "quiz-app-backend-dev-para-store"
           # env: 
           #   - name: MONGO_URI
           #     value: mongodb+srv://wangyaxu7:3Z9FqG4ZbDCXFUpL@quiz-app.037wdok.mongodb.net/?retryWrites=true&w=majority&appName=quiz-app
