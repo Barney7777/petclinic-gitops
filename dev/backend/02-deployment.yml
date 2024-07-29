@@ -37,6 +37,9 @@ spec:
             - name: secrets-store-inline
               mountPath: "/mnt/secrets-store"
               readOnly: true
+          env: 
+            - name: MONGO_URI
+              value: "/mnt/secrets-store/MONGO_URI"
       volumes:
         - name: secrets-store-inline
           csi:
