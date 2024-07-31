@@ -18,6 +18,7 @@ spec:
     metadata:
       labels:
         app: mysql-db
+        tier: database
     spec:
       serviceAccountName: db-secret-sa
       containers:
