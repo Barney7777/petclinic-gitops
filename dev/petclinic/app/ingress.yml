@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: petclinic-ingress
+  namespace: petclinic
+  annotations:
+    kubernetes.io/ingress.class: alb
+    # Load Balancer Name
+    alb.ingress.kubernetes.io/load-balancer-name: petclinic-ingress
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-2:587866558777:certificate/796e3be9-f307-4953-bcf9-b4406790574d
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    # alb.ingress.kubernetes.io/healthcheck-path: /api/health
+
+spec:
+  rules:
+    - host: petclinic.barneywang.click
+      http:
+        paths: 
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: petclinic-service
+                port:
+                  number: 8080
