@@ -34,3 +34,10 @@ spec:
           value: petclinic
         - name: MYSQL_DATABASE
           value: petclinic
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+    volumes:
+    - name: mysql-persistent-storage
+      persistentVolumeClaim:
+        claimName: mysql-pvc

@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: mysql-service
   labels:
-    app: petclinic
+    app: mysql-db
     tier: database
 spec:
   selector:
-    app: mysqldb
+    app: mysql-db
     tier: database
   ports: 
     - port: 3306
