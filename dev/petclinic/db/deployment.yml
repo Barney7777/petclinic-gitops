@@ -11,6 +11,7 @@ spec:
   selector:
     matchLabels:
       app: mysql-db
+      tier: database
   strategy:
     type: Recreate
   template:
