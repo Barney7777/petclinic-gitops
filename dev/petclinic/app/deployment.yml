@@ -30,7 +30,7 @@ spec:
               name: petclinic
           env:
             - name: MYSQL_URL
-              value: jdbc:mysql://mysql-db-db:3306/petclinic
+              value: jdbc:mysql://mysql-service:3306/petclinic
           # resources:
           #   requests:
           #     cpu: 100m
