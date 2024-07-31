@@ -5,8 +5,7 @@ metadata:
   namespace: petclinic
   labels:
     app: mysql-db
-    tire: database
-
+    tier: database
 spec:
   selector:
     matchLabels:
@@ -27,17 +26,38 @@ spec:
           name: mysql
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: root
-        - name: MYSQL_USER_NAME
-          value: petclinic
-        - name: MYSQL_USER_PASSWORD
-          value: petclinic
+          valueFrom:
+            secretKeyRef:
+              name: db-k8s-secret
+              key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-k8s-secret
+              key: MYSQL_USER
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-k8s-secret
+              key: MYSQL_PASSWORD
         - name: MYSQL_DATABASE
-          value: petclinic
+          valueFrom:
+            secretKeyRef:
+              name: db-k8s-secret
+              key: MYSQL_DATABASE
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
-    volumes:
-    - name: mysql-persistent-storage
-      persistentVolumeClaim:
-        claimName: mysql-pvc
+        - name: secrets
+          mountPath: /mnt/secrets
+          readOnly: true
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc
+      - name: secrets
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: mysql-aws-secrets
