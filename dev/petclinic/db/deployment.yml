@@ -5,6 +5,7 @@ metadata:
   namespace: petclinic
   labels:
     app: mysql-db
+    tire: database
 
 spec:
   selector:
