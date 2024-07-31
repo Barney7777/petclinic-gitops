@@ -5,7 +5,7 @@ metadata:
   namespace: petclinic
 
 spec:
-  # replicas: 2 #if use hpa, don't use replicas
+  replicas: 2 #if use hpa, don't use replicas
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -31,10 +31,10 @@ spec:
           env:
             - name: MYSQL_URL
               value: jdbc:mysql://petclinic-db:3306/petclinic
-          resources:
-            requests:
-              cpu: 100m
-              memory: 256Mi
-            limits:
-              cpu: 100m
-              memory: 256Mi
+          # resources:
+          #   requests:
+          #     cpu: 100m
+          #     memory: 256Mi
+          #   limits:
+          #     cpu: 100m
+          #     memory: 256Mi
