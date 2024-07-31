@@ -17,7 +17,7 @@ spec:
       labels:
         app: mysql-db
     spec:
-      serviceAccountName: db-secrets-sa
+      serviceAccountName: db-secret-sa
       containers:
       - name: mysql-db
         image: mysql:9.0
