@@ -37,8 +37,8 @@ spec:
               value: "petclinic"
           resources:
             requests:
-              cpu: 100m
+              cpu: 256m
               memory: 300Mi
             limits:
-              cpu: 100m
+              cpu: 256m
               memory: 300Mi
