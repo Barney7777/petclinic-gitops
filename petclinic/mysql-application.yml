@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: petclinic-app
+  name: petclinic-db
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io # force argocd to delete the kubernetes app first and then removes it from the argocd
@@ -10,7 +10,7 @@ spec:
 
   source:
     repoURL: https://github.com/Barney7777/petclinic-gitops.git
-    targetRevision: Devops-barney 
+    targetRevision: devops-barney 
     path: petclinic/db
   destination: 
     server: https://kubernetes.default.svc

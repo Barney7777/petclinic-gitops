@@ -10,7 +10,7 @@ spec:
 
   source:
     repoURL: https://github.com/Barney7777/petclinic-gitops.git
-    targetRevision: Devops-barney 
+    targetRevision: devops-barney 
     path: petclinic/app
   destination: 
     server: https://kubernetes.default.svc
