@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: petclinic-service
+  namespace: petclinic
+spec:
+  selector:
+    app: petclinic-app
+  ports:
+    - protocol: TCP
+      port: 8080 #port inside cluster/dockerfile
+      targetPort: 8080 # port exposed to the outside world
+  type: ClusterIP
