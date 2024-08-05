@@ -45,10 +45,6 @@ spec:
             readOnly: true
             volumeAttributes:
               secretProviderClass: "quiz-app-backend-dev-para-store"
-          # env: 
-          #   - name: MONGO_URI
-          #     value: mongodb+srv://wangyaxu7:3Z9FqG4ZbDCXFUpL@quiz-app.037wdok.mongodb.net/?retryWrites=true&w=majority&appName=quiz-app
-          # if app is able to  send trraffic or not
           livenessProbe:
             httpGet:
               path: /api/health
