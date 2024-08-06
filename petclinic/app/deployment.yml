@@ -31,10 +31,6 @@ spec:
           env:
             - name: MYSQL_URL
               value: "jdbc:mysql://mysql-service:3306/petclinic"
-            - name: MYSQL_USER
-              value: "petclinic"
-            - name: MYSQL_PASSWORD
-              value: "petclinic"
           resources:
             requests:
               cpu: 800m
