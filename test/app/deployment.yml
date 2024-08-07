@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petclinic-app
+  namespace: petclinic
+
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      app: petclinic-app
+  template:
+    metadata:
+      labels:
+        app: petclinic-app
+    spec:
+      imagePullSecrets:
+        - name: ecr-registry-secret
+      containers:
+        - name: petclinic-app
+          image: 587866558777.dkr.ecr.ap-southeast-2.amazonaws.com/petclinic-dev:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: petclinic
+          env:
+            - name: MYSQL_URL
+              value: "jdbc:mysql://mysql-service:3306/petclinic"
